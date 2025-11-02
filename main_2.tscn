@@ -1,0 +1,143 @@
+[gd_scene load_steps=13 format=4 uid="uid://57rkx5grasu1"]
+
+[ext_resource type="PackedScene" uid="uid://cswheshouik14" path="res://rules_goals/game_logic.tscn" id="1_11jtl"]
+[ext_resource type="Script" uid="uid://ddpiu13kl67le" path="res://scripts/MainLevel1.gd" id="1_77tfw"]
+[ext_resource type="PackedScene" uid="uid://dthyncc3spfks" path="res://spaces/dangerzone.tscn" id="2_eawnh"]
+[ext_resource type="PackedScene" uid="uid://8st4scqt06l8" path="res://components/player/player.tscn" id="3_8efqd"]
+[ext_resource type="PackedScene" uid="uid://jt80gv02u4f2" path="res://hud.tscn" id="5_hpglo"]
+[ext_resource type="Script" uid="uid://boqbxvbja884q" path="res://scripts/multiplayer_camera.gd" id="6_t5rjf"]
+[ext_resource type="TileSet" uid="uid://chc1g3d8pvk1x" path="res://assets/main_2.tres" id="7_hpglo"]
+[ext_resource type="PackedScene" uid="uid://daf24t18h3n5e" path="res://components/coin/coin.tscn" id="8_hpglo"]
+[ext_resource type="PackedScene" uid="uid://dk0xon0k7ga23" path="res://components/enemy/enemy.tscn" id="9_t5rjf"]
+[ext_resource type="PackedScene" uid="uid://beuisy5yrw0bq" path="res://components/flag/flag.tscn" id="10_77tfw"]
+[ext_resource type="PackedScene" uid="uid://v5cngwk86ag1" path="res://components/Logical/MovablePlatform.tscn" id="10_t5rjf"]
+[ext_resource type="PackedScene" uid="uid://dj64tt5cbpdq0" path="res://components/Logical/OperationBlock.tscn" id="11_77tfw"]
+
+[node name="main2" type="Node2D"]
+script = ExtResource("1_77tfw")
+
+[node name="GameLogic" parent="." instance=ExtResource("1_11jtl")]
+win_by_collecting_coins = true
+coins_to_win = 10
+win_by_reaching_flag = true
+lives = 9
+
+[node name="Dangerzone" parent="." instance=ExtResource("2_eawnh")]
+position = Vector2(3072, 665)
+
+[node name="HUD" parent="." instance=ExtResource("5_hpglo")]
+
+[node name="MultiplayerCamera" type="Camera2D" parent="."]
+position = Vector2(0, 15)
+enabled = false
+limit_left = 0
+limit_bottom = 1080
+position_smoothing_enabled = true
+script = ExtResource("6_t5rjf")
+
+[node name="TileMap" type="TileMap" parent="."]
+visible = false
+tile_set = ExtResource("7_hpglo")
+rendering_quadrant_size = 128
+collision_animatable = true
+format = 2
+layer_0/enabled = false
+layer_0/tile_data = PackedInt32Array(786432, 4, 0, 786433, 327684, 9, 786434, 327684, 9, 786435, 327684, 9, 786436, 327684, 9, 786437, 327684, 9, 786438, 327684, 9, 786439, 327684, 9, 786440, 327684, 9, 786441, 327684, 9, 786442, 327684, 9, 786443, 327684, 9, 786444, 131076, 0, 851980, 131076, 1, 917516, 131076, 1, 983052, 131076, 1, 1048588, 131076, 2, 1048587, 65540, 2, 1048586, 65540, 2, 1048585, 65540, 2, 1048584, 65540, 2, 1048583, 65540, 2, 1048582, 65540, 2, 1048581, 65540, 2, 1048580, 65540, 2, 1048579, 65540, 2, 1048578, 65540, 2, 1048577, 65540, 2, 1048576, 4, 2, 851968, 4, 1, 917504, 4, 1, 983040, 4, 1, 851969, 65540, 1, 917505, 65540, 1, 983041, 65540, 1, 851970, 65540, 1, 917506, 65540, 1, 983042, 65540, 1, 851971, 65540, 1, 917507, 65540, 1, 983043, 65540, 1, 851972, 65540, 1, 917508, 65540, 1, 983044, 65540, 1, 851973, 65540, 1, 917509, 65540, 1, 983045, 65540, 1, 851974, 65540, 1, 917510, 65540, 1, 983046, 65540, 1, 851975, 65540, 1, 917511, 65540, 1, 983047, 65540, 1, 851976, 65540, 1, 917512, 65540, 1, 983048, 65540, 1, 851977, 65540, 1, 917513, 65540, 1, 983049, 65540, 1, 851978, 65540, 1, 917514, 65540, 1, 983050, 65540, 1, 851979, 65540, 1, 917515, 65540, 1, 983051, 65540, 1, 786450, 262148, 0, 851986, 4, 1, 917522, 4, 1, 983058, 4, 1, 1048594, 4, 2, 1048595, 65540, 2, 1048596, 65540, 2, 1048597, 65540, 2, 1048598, 65540, 2, 1048599, 65540, 2, 1048600, 65540, 2, 1048601, 65540, 2, 1048602, 65540, 2, 1048603, 65540, 2, 786451, 65540, 0, 786452, 65540, 0, 786453, 65540, 0, 786454, 65540, 0, 786455, 65540, 0, 786456, 65540, 0, 786457, 65540, 0, 786458, 65540, 0, 786459, 65540, 0, 786460, 131076, 0, 851996, 131076, 1, 917532, 131076, 1, 983068, 131076, 1, 1048604, 131076, 2, 851987, 65540, 1, 917523, 65540, 1, 983059, 65540, 1, 851988, 65540, 1, 917524, 65540, 1, 983060, 65540, 1, 851989, 65540, 1, 917525, 65540, 1, 983061, 65540, 1, 851990, 65540, 1, 917526, 65540, 1, 983062, 65540, 1, 851991, 65540, 1, 917527, 65540, 1, 983063, 65540, 1, 851992, 65540, 1, 917528, 65540, 1, 983064, 65540, 1, 851993, 65540, 1, 917529, 65540, 1, 983065, 65540, 1, 851994, 65540, 1, 917530, 65540, 1, 983066, 65540, 1, 851995, 65540, 1, 917531, 65540, 1, 983067, 65540, 1, 327708, 655364, 0, 327707, 589828, 0, 327703, 655364, 0, 327702, 589828, 0, 589857, 327684, 1, 589856, 262148, 1, 524320, 262148, 0, 524321, 327684, 0, 327717, 4, 0, 393253, 4, 1, 458789, 4, 2, 458790, 65540, 2, 458791, 65540, 2, 458792, 65540, 2, 458793, 65540, 2, 458794, 65540, 2, 458795, 65540, 2, 327718, 65540, 0, 327719, 65540, 0, 327720, 65540, 0, 327721, 65540, 0, 327722, 65540, 0, 327723, 65540, 0, 327724, 131076, 0, 393260, 131076, 1, 458796, 131076, 2, 393254, 65540, 1, 393255, 65540, 1, 393256, 65540, 1, 393257, 65540, 1, 393258, 65540, 1, 393259, 65540, 1, 327697, 131076, 12, 327696, 65540, 12, 327695, 65540, 12, 327694, 65540, 12, 327693, 4, 12, 786471, 262148, 3, 786472, 262148, 3, 786473, 262148, 3, 786474, 262148, 3, 786475, 262148, 3, 786476, 262148, 3, 786477, 262148, 3, 786478, 262148, 3, 786479, 262148, 3, 786480, 262148, 3, 786481, 262148, 3, 786482, 262148, 3, 786483, 262148, 3, 786484, 262148, 3, 786485, 262148, 3, 786486, 262148, 3, 786487, 262148, 3, 786488, 262148, 3, 786489, 262148, 3, 786490, 262148, 3, 786491, 262148, 3, 786492, 262148, 3, 786493, 262148, 3, 786494, 262148, 3, 786496, 262148, 3, 786497, 262148, 3, 786498, 262148, 3, 786499, 262148, 3, 786500, 262148, 3, 786501, 262148, 3, 786502, 262148, 3, 786503, 262148, 3, 786504, 262148, 3, 786505, 262148, 3, 786495, 262148, 3, 786506, 262148, 3, 786507, 262148, 3, 786508, 262148, 3, 786509, 262148, 3, 786510, 262148, 3, 786511, 262148, 3, 786512, 262148, 3, 786513, 262148, 3, 786514, 262148, 3, 786515, 262148, 3, 786516, 262148, 3, 786517, 262148, 3, 786518, 262148, 3)
+
+[node name="coin" type="Node2D" parent="."]
+visible = false
+
+[node name="Coin" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(48.00003, 344)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Coin2" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(356.00003, 349.00003)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Coin3" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(641, 353.00003)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Coin4" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(884, 354)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Coin5" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(1052, 233)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Coin6" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(1239.0001, 131)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Coin7" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(1325, 131)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Coin8" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(730.00006, 141)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Coin12" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(899.00006, 142)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Coin9" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(540, 138)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Coin10" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(445, 135)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Coin11" parent="coin" instance=ExtResource("8_hpglo")]
+position = Vector2(766.00006, 354)
+scale = Vector2(0.20000243, 0.20000243)
+
+[node name="Flag" parent="." instance=ExtResource("10_77tfw")]
+position = Vector2(1427, 132)
+scale = Vector2(0.48000002, 0.48000002)
+
+[node name="Enemy" parent="." instance=ExtResource("9_t5rjf")]
+position = Vector2(704.00006, 356.00003)
+scale = Vector2(0.4, 0.4)
+collision_mask = 8
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAwAAAAAAAIAAAABAAwAAAAAAAIAAAACAAwAAAAAAAIAAAADAAwAAAAAAAIAAAAEAAwAAAAAAAIAAAAFAAwAAAAAAAIAAAAGAA0AAAAAAAIAAAAHAA0AAAAAAAIAAAAIAA0AAAAAAAIAAAAJAA0AAAAAAAIAAAAKAA0AAAAAAAIAAAAKAAwAAAAAAAIAAAALAAwAAAAAAAIAAAAMAAwAAAAAAAIAAAAJAAwAAAAAAAIAAAAIAAwAAAAAAAIAAAAHAAwAAAAAAAIAAAAGAAwAAAAAAAIAAAADAA0AAAAAAAIAAAACAA0AAAAAAAIAAAABAA0AAAAAAAIAAAAAAA0AAAAAAAIAAAAEAA0AAAAAAAIAAAAFAA0AAAAAAAIAAAALAA0AAAAAAAIAAAAMAA0AAAAAAAIAAAAMAA4AAAAAAAIAAAALAA4AAAAAAAIAAAALAA8AAAAAAAIAAAALABAAAAAAAAIAAAAMABAAAAAAAAIAAAAMAA8AAAAAAAIAAAAKAA8AAAAAAAIAAAAKAA4AAAAAAAIAAAAJAA4AAAAAAAIAAAAIAA4AAAAAAAIAAAAHAA4AAAAAAAIAAAAHAA8AAAAAAAIAAAAIAA8AAAAAAAIAAAAJAA8AAAAAAAIAAAAKABAAAAAAAAIAAAAJABAAAAAAAAIAAAAIABAAAAAAAAIAAAAHABAAAAAAAAIAAAAGABAAAAAAAAIAAAAGAA8AAAAAAAIAAAAGAA4AAAAAAAIAAAAFAA8AAAAAAAIAAAAFABAAAAAAAAIAAAAEABAAAAAAAAIAAAAEAA8AAAAAAAIAAAAFAA4AAAAAAAIAAAAEAA4AAAAAAAIAAAADAA4AAAAAAAIAAAACAA4AAAAAAAIAAAACAA8AAAAAAAIAAAABAA8AAAAAAAIAAAADAA8AAAAAAAIAAAADABAAAAAAAAIAAAACABAAAAAAAAIAAAABABAAAAAAAAIAAAAAABAAAAAAAAIAAAAAAA8AAAAAAAIAAAAAAA4AAAAAAAIAAAABAA4AAAAAAAIAAAAXAAwAAAAAAAIAAAAYAAwAAAAAAAIAAAAZAAwAAAAAAAIAAAAaAAwAAAAAAAIAAAAbAAwAAAAAAAIAAAAbAA0AAAAAAAIAAAAcAA0AAAAAAAIAAAAcAA4AAAAAAAIAAAAcAAwAAAAAAAIAAAAcAA8AAAAAAAIAAAAbAA8AAAAAAAIAAAAbABAAAAAAAAIAAAAaABAAAAAAAAIAAAAcABAAAAAAAAIAAAAbAA4AAAAAAAIAAAAaAA4AAAAAAAIAAAAaAA0AAAAAAAIAAAAaAA8AAAAAAAIAAAAZAA8AAAAAAAIAAAAZABAAAAAAAAIAAAAYABAAAAAAAAIAAAAYAA8AAAAAAAIAAAAYAA4AAAAAAAIAAAAYAA0AAAAAAAIAAAAZAA0AAAAAAAIAAAAZAA4AAAAAAAIAAAAXAA4AAAAAAAIAAAAXAA0AAAAAAAIAAAAXAA8AAAAAAAIAAAAXABAAAAAAAAIAAAA=")
+tile_set = ExtResource("7_hpglo")
+
+[node name="Player" parent="." instance=ExtResource("3_8efqd")]
+position = Vector2(184.99994, 191.99998)
+scale = Vector2(0.37748134, 0.37748134)
+speed = 200.0
+jump_velocity = -400.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-80.999985, -143.00002)
+scale = Vector2(0.4, 0.4)
+zoom = Vector2(2.395, 2.395)
+limit_left = 0
+limit_bottom = 1080
+position_smoothing_enabled = true
+
+[node name="Puzzle" type="Node2D" parent="."]
+
+[node name="MovablePlatform" parent="." instance=ExtResource("10_t5rjf")]
+position = Vector2(460, 394)
+
+[node name="OperationBlock" parent="." instance=ExtResource("11_77tfw")]
+position = Vector2(290, 292)
+
+[node name="OperationBlock2" parent="." instance=ExtResource("11_77tfw")]
+position = Vector2(342, 292)
+operation_type = "times"
+
+[node name="OperationBlock3" parent="." instance=ExtResource("11_77tfw")]
+position = Vector2(392, 292)
+operation_type = "invert"
+
+[connection signal="operation_activated" from="OperationBlock" to="." method="_on_operation_block_operation_activated"]
+[connection signal="operation_activated" from="OperationBlock2" to="." method="_on_operation_block_2_operation_activated"]
+[connection signal="operation_activated" from="OperationBlock3" to="." method="_on_operation_block_3_operation_activated"]

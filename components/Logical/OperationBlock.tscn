@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj64tt5cbpdq0"]
+
+[ext_resource type="Script" uid="uid://sfmyw5grd4la" path="res://scripts/operation_block.gd" id="1_hq67q"]
+[ext_resource type="Texture2D" uid="uid://bmvaf52lk456e" path="res://assets/SpriteSheets/sprite sheet for objects.png" id="2_7lbgc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hq67q"]
+size = Vector2(27.5, 24.25)
+
+[node name="OperationBlock" type="Area2D"]
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("1_hq67q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, -0.5)
+texture = ExtResource("2_7lbgc")
+region_enabled = true
+region_rect = Rect2(102, 39, 21, 21)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_hq67q")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -6.4999924
+offset_top = -7.499996
+offset_right = 19.30001
+offset_bottom = 15.500004
+scale = Vector2(0.49099553, 0.49099553)
+theme_override_colors/font_color = Color(0.021434637, 0.021434635, 0.021434633, 1)
+text = "+2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
