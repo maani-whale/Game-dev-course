@@ -1,43 +1,30 @@
 extends Node2D
+class_name LevelRoot
 
-# We need a reference to our platform.
-# Drag your MovablePlatform node from the Scene panel
-# onto this @export var in the Inspector!
-# OR, just make sure its name is "MovablePlatform" and use %
-@onready var _movable_platform: MovablePlatform = %MovablePlatform
+# Reference to your PuzzleManager node
+@onready var _puzzle_manager: PuzzleManager = %PuzzleManager
 
+# Reference to the moving platform (if you only have one)
+@onready var _movable_platform: MovingPlatform = %MovingPlatform
 
-# This is the "listener" function.
-# We will connect all our blocks' signals to this.
-func _on_operation_block_activated(type: String):
-	print("Main level heard signal: ", type)
-	
-	# Now, tell the platform to do the thing.
-	if _movable_platform:
-		_movable_platform.execute_operation(type)
+func _ready() -> void:
+	# Connect signals from the PuzzleManager
+	if _puzzle_manager:
+		_puzzle_manager.puzzle_solved.connect(_on_puzzle_solved)
+		_puzzle_manager.puzzle_failed.connect(_on_puzzle_failed)
 	else:
-		print("MainLevel script can't find MovablePlatform!")
+		push_error("LevelRoot couldn't find PuzzleManager!")
 
+	# Optional: ensure we found the platform too
+	if not _movable_platform:
+		push_warning("LevelRoot couldn't find MovingPlatform!")
 
-# You DO NOT need to add this code. This is just
-# to show you what "connecting a signal" means.
-func _ready():
-	# You can do this step in the editor, which is easier!
-	# $Block1.operation_activated.connect(_on_operation_block_activated)
-	# $Block2.operation_activated.connect(_on_operation_block_activated)
-	# $Block3.operation_activated.connect(_on_operation_block_activated)
-	pass
+# Called when the correct answer is chosen
+func _on_puzzle_solved() -> void:
+	print("✅ Puzzle solved! Platform moving!")
+	if _movable_platform:
+		_movable_platform.start_moving()
 
-
-
-
-func _on_operation_block_operation_activated(operation_type: String) -> void:
-	pass # Replace with function body.
-
-
-func _on_operation_block_2_operation_activated(operation_type: String) -> void:
-	pass # Replace with function body.
-
-
-func _on_operation_block_3_operation_activated(operation_type: String) -> void:
-	pass # Replace with function body.
+# Called when a wrong answer is chosen
+func _on_puzzle_failed(answer_id: String) -> void:
+	print("❌ Wrong answer chosen: ", answer_id)

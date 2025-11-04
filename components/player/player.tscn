@@ -3,19 +3,20 @@
 [ext_resource type="Script" uid="uid://umb21eb2y1oj" path="res://scripts/player.gd" id="1_w3ms2"]
 [ext_resource type="SpriteFrames" uid="uid://bo581k1esb50n" path="res://components/player/spriteframes-red.tres" id="2_msaml"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7x5a4"]
-radius = 31.0
-height = 92.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kfe3d"]
+radius = 9.392544
+height = 20.044308
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7x5a4"]
+radius = 22.0
+height = 72.0
 
 [node name="Player" type="CharacterBody2D" groups=["players"]]
-collision_layer = 3
-collision_mask = 5
 floor_constant_speed = true
 floor_snap_length = 32.0
 script = ExtResource("1_w3ms2")
 double_jump = true
+attack_anim_speed = null
 
 [node name="DoubleJumpParticles" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
@@ -34,28 +35,29 @@ color = Color(1, 1, 0, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -64)
+position = Vector2(2, -39)
+scale = Vector2(2.272645, 2.3427644)
 sprite_frames = ExtResource("2_msaml")
 animation = &"attack"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -46)
-shape = SubResource("CapsuleShape2D_7x5a4")
-one_way_collision = true
+frame = 4
+frame_progress = 0.9379613
 
 [node name="AttackHitbox" type="Area2D" parent="."]
-position = Vector2(-94, -48)
-collision_layer = 16
-collision_mask = 40
+position = Vector2(-2, -59)
+collision_layer = 8
+collision_mask = 56
 
 [node name="AttackCollisionShape" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(97.499954, -67.5)
+position = Vector2(23.000002, 19)
 scale = Vector2(5.216904, 3.891379)
 shape = SubResource("CapsuleShape2D_kfe3d")
-disabled = true
 
 [node name="AttackDurationTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -36)
+shape = SubResource("CapsuleShape2D_7x5a4")
